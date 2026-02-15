@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="robots" content="noindex, nofollow">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aayu – A Valentine Surprise</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@1&family=Dancing+Script&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Dancing Script', cursive;
+            background: linear-gradient(135deg, #8B0000, #C21807, #FFB6C1);
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .fade-in {
+            animation: fadeIn 1.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Hearts Animation */
+        .hearts::before {
+            content: '❤️';
+            position: absolute;
+            top: 10%;
+            left: 10%;
+            font-size: 2rem;
+            animation: float 6s infinite ease-in-out;
+        }
+
+        .hearts::after {
+            content: '💖';
+            position: absolute;
+            top: 50%;
+            right: 10%;
+            font-size: 1.5rem;
+            animation: float 8s infinite ease-in-out reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .center {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 80vh;
+            text-align: center;
+        }
+
+        /* Sections */
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        /* Headings */
+        .heading {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-style: italic;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .subtext {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .question {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+        }
+
+        /* Buttons */
+        .btn {
+            background: #C21807;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            font-family: 'Dancing Script', cursive;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 10px;
+        }
+
+        .btn:hover {
+            background: #8B0000;
+            box-shadow: 0 0 20px #FFB6C1;
+            transform: scale(1.05);
+        }
+
+        .glow {
+            box-shadow: 0 0 10px #FFB6C1;
+        }
+
+        .back-btn {
+            margin-top: 30px;
+        }
+
+        /* Icon Grid */
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            max-width: 400px;
+            margin-top: 30px;
+        }
+
+        .icon {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .icon:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px #FFB6C1;
+        }
+
+        .icon i {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        /* Gallery */
+/* ================= COMPACT GALLERY (8 PER PAGE) ================= */
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);  /* 4 images per row */
+    gap: 20px;
+    margin-top: 40px;
+}
+
+/* Card */
+.photo-card {
+    background: rgba(255, 255, 255, 0.08);
+    padding: 10px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 8px 18px rgba(0,0,0,0.3);
+    transition: 0.3s ease;
+}
+
+.photo-card:hover {
+    transform: scale(1.05);
+}
+
+/* Image smaller */
+.gallery-img {
+    width: 100%;
+    height: 140px;   /* SMALLER HEIGHT */
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* Caption smaller */
+.caption {
+    margin-top: 8px;
+    font-family: 'Playfair Display', serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+    color: #ffeaea;
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+    .gallery {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .gallery {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .gallery-img {
+        height: 120px;
+    }
+}
+
+        /* Letter and Sorry Text */
+/* ===== OLD ROMANTIC LETTER (CREAM PAPER) ===== */
+
+.letter-wrapper {
+    max-width: 780px;
+    margin: 80px auto;
+    padding: 65px 60px;
+    background: #fff7e6; /* soft creamy paper */
+    border-radius: 6px;
+    box-shadow:
+        0 15px 35px rgba(0, 0, 0, 0.35),
+        inset 0 0 30px rgba(255, 235, 200, 0.6);
+    position: relative;
+    z-index: 2;
+}
+
+/* Slight paper texture feel */
+.letter-wrapper::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.02),
+        rgba(0,0,0,0.02) 1px,
+        transparent 1px,
+        transparent 4px
+    );
+    pointer-events: none;
+    border-radius: 6px;
+}
+
+/* Title */
+.letter-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    text-align: center;
+    color: #7b0000;
+    margin-bottom: 35px;
+    font-style: italic;
+}
+
+/* Letter text */
+.letter-text {
+    font-family: 'Dancing Script', cu
+
+
+        /* Love List */
+        .love-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .love-list li {
+            margin: 10px 0;
+            animation: fadeInList 1s ease-in-out;
+            animation-fill-mode: both;
+        }
+
+        .love-list li:nth-child(1) { animation-delay: 0.5s; }
+        .love-list li:nth-child(2) { animation-delay: 1s; }
+        .love-list li:nth-child(3) { animation-delay: 1.5s; }
+
+        @keyframes fadeInList {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* GIF */
+        .gif {
+            max-width: 300px;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+
+        /* Music Button */
+        .music-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #C21807;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .music-btn:hover {
+            box-shadow: 0 0 10px #FFB6C1;
+        }
+
+        /* Footer */
+        .footer {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.8rem;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .heading { font-size: 2rem; }
+            .icon-grid { grid-template-columns: 1fr; }
+            .gallery { grid-template-columns: 1fr; }
+        }
+
+
+/* Image + Text under image */
+.photo-card {
+    background: rgba(255, 255, 255, 0.08);
+    padding: 15px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+
+.caption {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: #ffe6e6;
+    text-align: center;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+}
+
+
+.caption {
+    margin-top: 12px;
+    font-family: 'Playfair Display', serif;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    color: #ffeaea;
+}
+
+
+    </style>
+</head>
+<body class="fade-in">
+<script>
+    var password = "KALLO06";  // CHANGE THIS PASSWORD
+
+    var userInput = prompt("Enter the secret password ❤️");
+aa
+    if (userInput !== password) {
+        document.body.innerHTML = "<h1 style='color:white;text-align:center;margin-top:20%;'>Access Denied 💔</h1>";
+    }
+</script>
+    <!-- Landing Section -->
+    <div id="landing" class="section active">
+        <div class="container center">
+            <h1 class="heading">Aayu ❤️</h1>
+            <p class="subtext">There is a surprise inside it I HOPE YOU WOULD LIIKE IT ❤️❤️...</p>
+            <p class="question">Will you be my Valentine?</p>
+            <div class="buttons">
+                <button id="yes-btn" class="btn glow">YES ❤️</button>
+                <button id="no-btn" class="btn">NO 😢</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Home Section -->
+    <div id="home" class="section">
+        <div class="container center">
+            <h1 class="heading">Aayu ❤️</h1>
+            <p class="subtext">You are my favorite person in this universe ✨</p>
+            <div class="icon-grid">
+                <div class="icon" onclick="showSection('album')">
+                    <i class="fas fa-camera"></i>
+                    <p>Our Album</p>
+                </div>
+                <div class="icon" onclick="showSection('letter')">
+                    <i class="fas fa-envelope"></i>
+                    <p>My Letter</p>
+                </div>
+                <div class="icon" onclick="showSection('love')">
+                    <i class="fas fa-heart"></i>
+                    <p>Why I Love You</p>
+                </div>
+                <div class="icon" onclick="showSection('sorry')">
+                    <i class="fas fa-sad-tear"></i>
+                    <p>Sorry For Making You Sad</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Album Section -->
+    <div id="album" class="section">
+        <div class="container">
+            <h1 class="heading">Our Beautiful Memories ❤️</h1>
+<div class="photo-card">
+    <img src="img1.jpeg" class="gallery-img">
+    <p class="caption">WHEN I FIRST SAW YOU</p>
+</div>
+
+<div class="photo-card">
+    <img src="img2.jpeg" class="gallery-img">
+    <p class="caption">MY DREAM DRESS FOR YOU</p>
+</div>
+
+<div class="photo-card">
+    <img src="img3.jpeg" class="gallery-img">
+    <p class="caption">FIRST BUTTERFLY IN MY HEART</p>
+</div>
+
+<div class="photo-card">
+    <img src="img4.jpeg" class="gallery-img">
+    <p class="caption">MY ALL TIME FAVOURITE PHOTO</p>
+</div>
+
+            <button class="btn back-btn" onclick="showSection('home')">Back to Home</button>
+        </div>
+    </div>
+
+    <!-- Letter Section -->
+    <div id="letter" class="section">
+        <div class="container center">
+            <div class="card">
+                <h1 class="heading">My Letter to You ❤️</h1>
+                <!-- WRITE YOUR ROMANTIC LETTER HERE: Replace the example paragraph with your personal letter. -->
+                <p class="letter-text">I don’t know the exact moment it happened… but somewhere between our conversations, your laughter, and the way you say my name, you quietly became the most beautiful part of my life.<br><br>
+
+Even when we are miles apart, I feel you with me. In my thoughts. In my dreams. In the small moments of my day that I wish I could share with you. You have this magical way of making everything feel lighter, softer, warmer.<br><br>
+
+Your smile is my favorite sight. Your voice is my comfort. Your heart is my safe place. And loving you is the easiest and most natural thing I have ever done.<br><br>
+
+I promise to stand by you, to support your dreams, to wipe your tears, to celebrate your victories, and to love you in ways that grow stronger every single day. Distance may test us, but it will never weaken what I feel for you.<br><br>
+
+You are not just my Valentine… you are my peace, my happiness, my forever</p>
+            </div>
+            <button class="btn back-btn" onclick="showSection('home')">Back to Home</button>
+        </div>
+    </div>
+
+    <!-- Love Section -->
+    <div id="love" class="section">
+        <div class="container center">
+            <div class="card">
+                <h1 class="heading">Why I Love You ❤️</h1>
+                <ul class="love-list">
+                    <!-- ADD YOUR REASONS HERE: Replace with your personal reasons. Example list below. -->
+                    <li>❤️ Your beautiful smile</li>
+                    <li>❤️ The way you see me</li>
+                    <li>❤️ Your Eyes</li>
+                    <li>❤️ Your Duddu</li>
+                    <li>❤️ Your Kukku</li>
+                    <li>❤️ Your Lover for me</li>
+
+                    <!-- Add more <li> items as needed -->
+                </ul>
+            </div>
+            <button class="btn back-btn" onclick="showSection('home')">Back to Home</button>
+        </div>
+    </div>
+
+    <!-- Sorry Section -->
+    <div id="sorry" class="section">
+        <div class="container center">
+            <h1 class="heading">I'm Sorry ❤️</h1>
+            <!-- INSERT APOLOGY GIF HERE: Replace with your actual GIF path. Example placeholder below. -->
+            <img src="sorry.gif" alt="Apology GIF" class="gif">
+            <!-- WRITE YOUR APOLOGY MESSAGE HERE: Replace the example paragraph with your personal message. -->
+            <p class="sorry-text">I never want to hurt you... You mean everything to me... Please forgive me, my love.</p>
+            <button class="btn back-btn" onclick="showSection('home')">Back to Home</button>
+        </div>
+    </div>
+
+<div class="hearts"></div>
+<footer class="footer">Made with ❤️ only for Aayu</footer>
+
+<audio id="bg-music" autoplay loop muted>
+    <source src="music.mpeg" type="audio/mpeg">
+</audio>
+
+<button id="music-toggle" class="music-btn">🎵 Play Music</button>
+
+<script>
+const music = document.getElementById("bg-music");
+const musicToggle = document.getElementById("music-toggle");
+
+// ===== AUTO PLAY ON FIRST CLICK (SAFE) =====
+function startMusicOnce() {
+    if (music.muted) {
+        music.muted = false;
+        music.volume = 0.5;
+        music.play();
+        musicToggle.textContent = "⏸ Pause Music";
+    }
+    document.body.removeEventListener("click", startMusicOnce);
+}
+
+document.body.addEventListener("click", startMusicOnce);
+
+// ===== MUSIC TOGGLE BUTTON =====
+musicToggle.addEventListener("click", function (e) {
+    e.stopPropagation();
+    if (music.paused) {
+        music.play();
+        musicToggle.textContent = "⏸ Pause Music";
+    } else {
+        music.pause();
+        musicToggle.textContent = "🎵 Play Music";
+    }
+});
+
+// ===== SECTION SWITCHING =====
+function showSection(sectionId) {
+    document.querySelectorAll('.section').forEach(section => {
+        section.classList.remove('active');
+    });
+    document.getElementById(sectionId).classList.add('active');
+}
+
+// YES BUTTON → NEXT PAGE
+document.getElementById("yes-btn").addEventListener("click", function () {
+    showSection("home"); // change if needed
+});
+
+// NO BUTTON → RUNS AWAY 😈
+const noBtn = document.getElementById("no-btn");
+noBtn.addEventListener("mouseover", function () {
+    const x = Math.random() * (window.innerWidth - 120);
+    const y = Math.random() * (window.innerHeight - 120);
+    noBtn.style.position = "absolute";
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+});
+</script>
+
+</body>
+</html>
